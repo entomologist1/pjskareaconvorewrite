@@ -1,7 +1,8 @@
 
+
 var speakerList = [];
-var dialogueList = [];
-//^ remove later
+var areaConvoList = [];
+//global #sorry
 
 //areaconvo contains dialoguelist
 //dialoguelist contains speakers and text
@@ -13,7 +14,7 @@ class Speaker {
     this.color = initColor;
 
     this.images = {
-      default: initImagePath
+      default: initImagePath //forever
     };
 
     this.trueID = `${Date.now()}-${Math.floor(Math.random() * 100000)}`; //welcome back relationshipchartmaker 
@@ -40,12 +41,14 @@ class Speaker {
   }
 }
 
-
+//orderid + sortable js will be here eventually
 class DialogueBox {
   constructor(selectedSpeaker) {
     this.speakerID = selectedSpeaker.trueID;
     this.dialogueText = "Replace text here .........";
     this.imageName = "default";
+    
+    this.trueID = `${Date.now()}-${Math.floor(Math.random() * 100000)}`;
   }
 
   replaceSpeaker(newSpeaker) {
@@ -87,4 +90,33 @@ class DialogueBox {
   changeDialogue(newDialogue) {
     this.dialogueText = newDialogue;
   }
+  
+  reorderDialogueBox() {
+    
+  }
 }
+
+class AreaConvoBox {
+  constructor(imagePath) {
+    this.imagePath = imagePath;
+    this.dialogueBoxList = [];
+    //skip if empty when exporting
+  }
+
+  addDialogueBox(speaker) {
+    this.dialogueBoxList.push(new DialogueBox(speaker));
+  }
+
+  removeDialogueBox(dialogueBoxID) {
+    const index = this.dialogueBoxList.findIndex(
+      dialogueBox => dialogueBox.trueID == dialogueBoxID
+    );
+
+    if (index === -1) {
+      console.error("DialogueBox not found ....... ");
+      return;
+    }
+
+    this.dialogueBoxList.splice(index, 1); //
+  }
+} 
