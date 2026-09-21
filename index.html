@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>my website</title>
+  <!-- boostrap -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="../global/global.css" />
+
+  <!-- animation -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+</head>
+
+<body>
+  <!-- header -->
+  <div id="navbarContainer">
+    <div class="row p-2" id="navbar" data-aos="fade-down" data-aos-delay="1000">
+      <div class="col-12 col-md-5 d-flex align-items-center">
+        <p>my website</p>
+      </div>
+
+      <div class="col-12 col-md-7 d-flex align-items-center justify-content-end">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item ml-auto">
+              <a href="/">home</a>
+            </li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <!-- main page -->
+  <div id="mainContentContainer" class="row justify-content-center align-items-center p-4" style="height: 1500px">
+    <!-- actual main content goes here -->
+    <div id="mainContent" class="col-12 col-md-10 d-flex justify-content-center flex-wrap">
+      <div id="container" class="col-12 p-4 g-3" style="max-width: 1000px">
+        <h2><u>title</u></h2>
+        <h3>date</h3>
+
+        <p>talk</p>
+
+        <div class="container card" >
+          
+          <div class="row" style="min-height: 300px;">
+            <div id="speakerSelect" class="col" style="min-height: 100px; background-color:orange"></div>
+            <div id="speakerList" class="col-12 col-sm-12 col-md-8 order-12 order-sm-12 order-md-6" style="min-height: 100px; background-color:red"></div>
+          </div>
+          <div class="row">
+            <div id="speakerAddDelete" class="col" style="min-height: 100px; background-color:pink"></div>
+          </div>
+          
+          <div class="row">
+            <div id="speakerImageList" class="col" style="min-height: 300px; background-color:blue"></div>
+            <div class="speakerImageAddDelete" style="min-height: 100px; background-color:cyan"></div>
+          </div>
+          
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- footer -->
+  <div id="footer" class="d-flex justify-content-center align-items-center p-4">
+    <p>
+      <a href="https://unsplash.com/photos/nature-christmas-concept-flat-lay-T86aoafcM38">
+        image credit
+      </a>
+    </p>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+
+  <!-- animation -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+
+  <!-- scrolling -->
+  <script src="script.js"></script>
+</body>
+
+</html>
