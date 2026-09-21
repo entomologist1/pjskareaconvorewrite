@@ -47,18 +47,94 @@
 
         <div class="container card" >
           
+          <!-- speaker functionality will go here -->
           <div class="row" style="min-height: 300px;">
-            <div id="speakerSelect" class="col" style="min-height: 100px; background-color:orange"></div>
-            <div id="speakerList" class="col-12 col-sm-12 col-md-8 order-12 order-sm-12 order-md-6" style="min-height: 100px; background-color:red"></div>
-          </div>
-          <div class="row">
-            <div id="speakerAddDelete" class="col" style="min-height: 100px; background-color:pink"></div>
+            <div id="speakerAddDelete" class="col" style="min-height: 100px; background-color:pink">
+              
+              <!-- submit -->
+                <div id="submitSpeakerDiv" class="mb-3 bg-faded p-3 h-100">
+                  <form id="submitSpeakerForm" class="form-group">
+                    
+                    <label for="speakerNameid">Name:</label>
+                    <input
+                      type="text"
+                      id="speakerNameid"
+                      name="speakerName"
+                      class="form-control mb-2"
+                      required
+                    />
+
+                    <label for="speakerColorId">Color:</label>
+                    <input
+                      type="url"
+                      id="speakerURLid"
+                      name="speakerURL"
+                      class="form-control mb-2"
+                      value="https://toyhou.se/"
+                      required
+                    />
+
+                    <label for="speakerImageid">Default Image URL:</label>
+                    <input
+                      type="url"
+                      id="speakerImageid"
+                      name="speakerImage"
+                      class="form-control mb-3"
+                      value="https://f2.toyhou.se/file/f2-toyhou-se/users/entomologist?12"
+                      required
+                    />
+
+                    <button type="submit" class="btn btn-primary" onClick="submitSpeaker()">
+                      Submit Speaker
+                    </button>
+                  </form>
+                </div>
+              
+              
+              
+            </div>
+            <div id="speakerList" class="col-12 col-sm-12 col-md-8 order-12 order-sm-12 order-md-6" style="min-height: 100px; background-color:red"> speakers go here when submitted</div>
           </div>
           
-          <div class="row">
-            <div id="speakerImageList" class="col" style="min-height: 300px; background-color:blue"></div>
-            <div class="speakerImageAddDelete" style="min-height: 100px; background-color:cyan"></div>
+          <!-- speaker image functionality will go here (only show when a speaker is actually selected ?) -->
+          <div class="row" style="min-height: 300px;">
+            <div id="speakerImageAddDelete" class="col" style="min-height: 100px; background-color:blue">
+              
+              <!-- submit -->
+                <div id="submitSpeakerImageDiv" class="mb-3 bg-faded p-3 h-100">
+                  <form id="submitSpeakerImageForm" class="form-group">
+                    
+                    <label for="speakerImageNameid">Image name:</label>
+                    <input
+                      type="text"
+                      id="speakerImageNameid"
+                      name="speakerImageName"
+                      class="form-control mb-2"
+                      required
+                    />
+
+                    <label for="speakerImageLinkid">Image URL:</label>
+                    <input
+                      type="url"
+                      id="speakerImageLinkid"
+                      name="speakerImageLink"
+                      class="form-control mb-3"
+                      value="https://f2.toyhou.se/file/f2-toyhou-se/users/entomologist?12"
+                      required
+                    />
+
+                    <button type="submit" class="btn btn-primary" onClick="submitSpeakerImage()">
+                      Submit Image for Selected Speaker
+                    </button>
+                  </form>
+                </div>
+              
+              
+              
+            </div>
+            <div id="speakerImageList" class="col-12 col-sm-12 col-md-8 order-12 order-sm-12 order-md-6" style="min-height: 100px; background-color:cyan"> speaker images go here when submitted</div>
           </div>
+          
           
         </div>
 
