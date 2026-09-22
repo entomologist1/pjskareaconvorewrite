@@ -163,15 +163,20 @@ function submitSpeaker(event) {
     const selectedSpeaker = speakerListElement.querySelector(".selected");
 
     if (speakerDiv.classList.contains("selected")) {
+      speakerSelect = false;
       speakerDiv.classList.remove("selected");
       return;
     }
 
     if (selectedSpeaker) {
+      speakerSelect = false;
       selectedSpeaker.classList.remove("selected");
     }
 
     speakerDiv.classList.add("selected");
+    speakerSelect = true;
+    
+    // console.log(speakerSelect)
   });
 
   const speakerImageElement = document.createElement("img");
