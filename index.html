@@ -10,6 +10,13 @@
 
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="../global/global.css" />
+  
+  
+    <!-- coloris-->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.css"
+    />
 
   <!-- animation -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
@@ -57,8 +64,8 @@
               <div class="container card accordion-body" id="speakerEditingHere">
 
                 <!-- speaker functionality will go here -->
-                <div class="row" style="min-height: 300px;">
-                  <div id="speakerAddDelete" class="col" style="min-height: 100px; background-color:pink">
+                <div class="row" style="min-height: 300px; max-height: 500px; overflow: scroll;">
+                  <div id="speakerAddDelete" class="col" style="min-height: 100px; background-color:pink; overflow: stretch;">
 
                     <!-- submit -->
                     <div id="submitSpeakerDiv" class="mb-3 bg-faded p-3 h-100">
@@ -66,9 +73,17 @@
 
                         <label for="speakerNameid">Name:</label>
                         <input type="text" id="speakerNameid" name="speakerName" class="form-control mb-2" required />
-
-                        <label for="speakerColorId">Color:</label>
-                        <input type="url" id="speakerURLid" name="speakerURL" class="form-control mb-2" value="https://toyhou.se/" required />
+                        
+                        <label for="speakerColorId" class="mr-2">slice color</label>
+                        <input
+                          type="text"
+                          class="form-control mb-2"
+                          id="speakerURLid"
+                          name="speakerURL"
+                          value="#FF0000"
+                          required
+                          data-coloris
+                        />
 
                         <label for="speakerImageid">Default Image URL:</label>
                         <input type="url" id="speakerImageid" name="speakerImage" class="form-control mb-3" value="https://f2.toyhou.se/file/f2-toyhou-se/users/entomologist?12" required />
@@ -80,11 +95,11 @@
                     </div>
 
                   </div>
-                  <div id="speakerList" class="col-12 col-sm-12 col-md-8 order-12 order-sm-12 order-md-6" style="min-height: 100px; background-color:red"> speakers go here when submitted</div>
+                  <div id="speakerList" class="col-12 col-sm-12 col-md-8 order-12 order-sm-12 order-md-6" style="min-height: 100px; background-color:red; overflow: scroll; "> </div>
                 </div>
 
                 <!-- speaker image functionality will go here (only show when a speaker is actually selected ?) -->
-                <div class="row" style="min-height: 300px;">
+                <div id="imageControl" class="row" style="min-height: 300px;">
                   <div id="speakerImageAddDelete" class="col" style="min-height: 100px; background-color:blue">
 
                     <!-- submit -->
@@ -176,7 +191,7 @@
                     </div>
 
                   </div>
-                  <div id="speakerList" class="col-12 col-sm-12 col-md-8 order-12 order-sm-12 order-md-6" style="min-height: 100px; background-color:red"> speakers go here when submitted</div>
+                  <div id="dialogueList" class="col-12 col-sm-12 col-md-8 order-12 order-sm-12 order-md-6" style="min-height: 100px; background-color:red"> dialogue go here when submitted</div>
                 </div>
               </div>
               
@@ -202,6 +217,10 @@
   <!-- animation -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  
+  
+    <!-- coloris -->
+    <script src="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.js"></script>
 
   <!-- scrolling -->
   <script src="script.js"></script>
