@@ -227,3 +227,16 @@ document.addEventListener("DOMContentLoaded", function () {
 // Area convo editing
 
 // Dialogue editing
+
+
+
+////
+
+//update selected divs later
+// imagecontrol depends on speakerlist's selection
+// dialogue editing depends on area convo's selection
+
+function updateSelections() {
+  
+  
+}
