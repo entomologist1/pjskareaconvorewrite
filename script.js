@@ -234,6 +234,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 //update selected divs later
 // imagecontrol depends on speakerlist's selection
+// speaker images' display depends on speakerlist's selection
 // dialogue editing depends on area convo's selection
 
 function updateSelections() {
@@ -251,6 +252,8 @@ function updateSelections() {
     imageControlDiv.style.visibility = "visible";
   }
 }
+
+
 
 
 //on load
