@@ -1,4 +1,7 @@
 
+var speakerSelect = false;
+var areaConvoSelect = false;
+var dialogueSelect = false;
 
 var speakerList = [];
 var areaConvoList = [];
