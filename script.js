@@ -163,20 +163,16 @@ function submitSpeaker(event) {
     const selectedSpeaker = speakerListElement.querySelector(".selected");
 
     if (speakerDiv.classList.contains("selected")) {
-      speakerSelect = false;
       speakerDiv.classList.remove("selected");
-      return;
+    } else {
+      if (selectedSpeaker) {
+        selectedSpeaker.classList.remove("selected");
+      }
+
+      speakerDiv.classList.add("selected");
     }
 
-    if (selectedSpeaker) {
-      speakerSelect = false;
-      selectedSpeaker.classList.remove("selected");
-    }
-
-    speakerDiv.classList.add("selected");
-    speakerSelect = true;
-    
-    // console.log(speakerSelect)
+    updateSelections();
   });
 
   const speakerImageElement = document.createElement("img");
@@ -209,6 +205,7 @@ function submitSpeaker(event) {
     }
 
     speakerDiv.remove();
+    updateSelections();
   });
   speakerDiv.appendChild(deleteButton);
 
@@ -222,6 +219,9 @@ document.addEventListener("DOMContentLoaded", function () {
   if (speakerForm) {
     speakerForm.addEventListener("submit", submitSpeaker);
   }
+  
+  updateSelections();
+  
 });
 
 // Area convo editing
@@ -237,6 +237,21 @@ document.addEventListener("DOMContentLoaded", function () {
 // dialogue editing depends on area convo's selection
 
 function updateSelections() {
-  
-  
+  const imageControlDiv = document.getElementById("imageControl");
+  const speakerListElement = document.querySelector(
+    "#speakerEditingHere #speakerList"
+  );
+
+  const selectedSpeaker = speakerListElement?.querySelector(".selected");
+  speakerSelect = !!selectedSpeaker;
+
+  if (speakerSelect === false) {
+    imageControlDiv.style.visibility = "collapse";
+  } else {
+    imageControlDiv.style.visibility = "visible";
+  }
 }
+
+
+//on load
+updateSelections();
