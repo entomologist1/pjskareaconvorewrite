@@ -123,3 +123,98 @@ class AreaConvoBox {
     this.dialogueBoxList.splice(index, 1); //
   }
 } 
+
+
+// Speaker editing
+
+function submitSpeaker(event) {
+  if (event) {
+    event.preventDefault();
+  }
+
+  const speakerName = document.getElementById("speakerNameid").value.trim();
+  const speakerColor = document.getElementById("speakerColorId").value.trim();
+  const speakerImage = document.getElementById("speakerImageid").value.trim();
+  const speakerListElement = document.querySelector(
+    "#speakerEditingHere #speakerList"
+  );
+
+  if (!speakerListElement || !speakerName || !speakerColor || !speakerImage) {
+    return;
+  }
+
+  const speaker = new Speaker(speakerName, speakerColor, speakerImage);
+  speakerList.push(speaker);
+
+  const speakerDiv = document.createElement("div");
+  speakerDiv.classList.add("speaker-entry");
+  speakerDiv.dataset.trueId = speaker.trueID;
+  speakerDiv.style.position = "relative";
+  speakerDiv.style.marginBottom = "15px";
+  speakerDiv.style.marginRight = "10px";
+  speakerDiv.style.padding = "5px";
+  speakerDiv.style.border = "1px solid #afafafff";
+  speakerDiv.style.borderRadius = "8px";
+  speakerDiv.style.display = "inline-block";
+  speakerDiv.style.textAlign = "center";
+  speakerDiv.style.cursor = "pointer";
+
+  speakerDiv.addEventListener("click", function () {
+    const selectedSpeaker = speakerListElement.querySelector(".selected");
+
+    if (speakerDiv.classList.contains("selected")) {
+      speakerDiv.classList.remove("selected");
+      return;
+    }
+
+    if (selectedSpeaker) {
+      selectedSpeaker.classList.remove("selected");
+    }
+
+    speakerDiv.classList.add("selected");
+  });
+
+  const speakerImageElement = document.createElement("img");
+  speakerImageElement.src = speakerImage;
+  speakerImageElement.alt = speakerName;
+  speakerImageElement.style.width = "100px";
+  speakerImageElement.style.height = "100px";
+  speakerImageElement.style.objectFit = "cover";
+  speakerImageElement.style.display = "block";
+  speakerDiv.appendChild(speakerImageElement);
+
+  const speakerTitle = document.createElement("p"); 
+  speakerTitle.textContent = speakerName; 
+  speakerDiv.appendChild(speakerTitle);
+
+  const deleteButton = document.createElement("button");
+  deleteButton.type = "button";
+  deleteButton.classList.add("btn", "btn-sm", "btn-danger");
+  deleteButton.textContent = "Delete";
+  deleteButton.style.marginLeft = "10px";
+  deleteButton.addEventListener("click", function (deleteEvent) {
+    deleteEvent.stopPropagation();
+
+    const speakerIndex = speakerList.findIndex(
+      (item) => item.trueID === speaker.trueID
+    );
+
+    if (speakerIndex !== -1) {
+      speakerList.splice(speakerIndex, 1);
+    }
+
+    speakerDiv.remove();
+  });
+  speakerDiv.appendChild(deleteButton);
+
+  speakerListElement.appendChild(speakerDiv);
+  document.getElementById("submitSpeakerForm").reset();
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  const speakerForm = document.getElementById("submitSpeakerForm");
+
+  if (speakerForm) {
+    speakerForm.addEventListener("submit", submitSpeaker);
+  }
+});
