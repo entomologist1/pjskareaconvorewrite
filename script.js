@@ -44,7 +44,7 @@ class Speaker {
   }
 }
 
-//orderid + sortable js will be here eventually
+//sortable js will be here eventually
 class DialogueBox {
   constructor(selectedSpeaker) {
     this.speakerID = selectedSpeaker.trueID;
@@ -99,6 +99,7 @@ class DialogueBox {
   }
 }
 
+//here too
 class AreaConvoBox {
   constructor(imagePath) {
     this.imagePath = imagePath;
@@ -126,7 +127,6 @@ class AreaConvoBox {
 
 
 // Speaker editing
-
 function submitSpeaker(event) {
   if (event) {
     event.preventDefault();
@@ -218,3 +218,7 @@ document.addEventListener("DOMContentLoaded", function () {
     speakerForm.addEventListener("submit", submitSpeaker);
   }
 });
+
+// Area convo editing
+
+// Dialogue editing
