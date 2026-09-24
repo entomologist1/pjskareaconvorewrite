@@ -10,13 +10,9 @@
 
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="../global/global.css" />
-  
-  
-    <!-- coloris-->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.css"
-    />
+
+  <!-- coloris-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.css" />
 
   <!-- animation -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
@@ -67,23 +63,16 @@
                 <div class="row" style="min-height: 300px; max-height: 500px; overflow: scroll;">
                   <div id="speakerAddDelete" class="col" style="min-height: 100px; background-color:pink; overflow: stretch;">
 
-                    <!-- submit -->
                     <div id="submitSpeakerDiv" class="mb-3 bg-faded p-3 h-100">
+
+                      <!-- submitting speaker -->
                       <form id="submitSpeakerForm" class="form-group">
 
                         <label for="speakerNameid">Name:</label>
                         <input type="text" id="speakerNameid" name="speakerName" class="form-control mb-2" required />
-                        
-                        <label for="speakerColorId" class="mr-2">slice color</label>
-                        <input
-                          type="text"
-                          class="form-control mb-2"
-                          id="speakerColorId"
-                          name="speakerColor"
-                          value="#FF0000"
-                          required
-                          data-coloris
-                        /> 
+
+                        <label for="speakerColorId" class="mr-2">Color</label>
+                        <input type="text" class="form-control mb-2" id="speakerColorId" name="speakerColor" value="#FF0000" required data-coloris />
 
                         <label for="speakerImageid">Default Image URL:</label>
                         <input type="url" id="speakerImageid" name="speakerImage" class="form-control mb-3" value="https://f2.toyhou.se/file/f2-toyhou-se/users/entomologist?12" required />
@@ -92,6 +81,24 @@
                           Submit Speaker
                         </button>
                       </form>
+
+                      <!-- updating speaker -->
+                      <form id="updateSpeakerForm" class="form-group">
+
+                        <label for="updateSpeakerNameid">Name:</label>
+                        <input type="text" id="updateSpeakerNameid" name="speakerName" class="form-control mb-2" required />
+
+                        <label for="updateSpeakerColorId">Color</label>
+                        <input type="text" class="form-control mb-2" id="updateSpeakerColorId" name="speakerColor" value="#FF0000" required data-coloris />
+
+                        <label for="updateSpeakerImageid">Default Image URL:</label>
+                        <input type="url" id="updateSpeakerImageid" name="speakerImage" class="form-control mb-3" value="https://f2.toyhou.se/file/f2-toyhou-se/users/entomologist?12" required />
+
+                        <button type="submit" class="btn btn-primary" onclick="updateSpeaker()">
+                          Update Speaker
+                        </button>
+                      </form>
+
                     </div>
 
                   </div>
@@ -168,7 +175,7 @@
               </button>
             </h2>
             <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-              
+
               <div class="container card accordion-body" id="dialogueEditingHere">
                 <div class="row " style="min-height: 300px;">
                   <div id="dialogueAddDelete" class="col" style="min-height: 100px; background-color:pink">
@@ -194,7 +201,7 @@
                   <div id="dialogueList" class="col-12 col-sm-12 col-md-8 order-12 order-sm-12 order-md-6" style="min-height: 100px; background-color:red"> dialogue go here when submitted</div>
                 </div>
               </div>
-              
+
             </div>
           </div>
         </div>
@@ -217,14 +224,12 @@
   <!-- animation -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
-  
-  
-    <!-- coloris -->
-    <script src="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.js"></script>
-  
-  
-    <!-- sortable -->
-    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+
+  <!-- coloris -->
+  <script src="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.js"></script>
+
+  <!-- sortable -->
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
 
   <!-- scrolling -->
   <script src="script.js"></script>
