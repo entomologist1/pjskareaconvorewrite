@@ -77,7 +77,7 @@
                         <label for="speakerImageid">Default Image URL:</label>
                         <input type="url" id="speakerImageid" name="speakerImage" class="form-control mb-3" value="https://f2.toyhou.se/file/f2-toyhou-se/users/entomologist?12" required />
 
-                        <button type="submit" class="btn btn-primary" onClick="submitSpeaker()">
+                        <button type="submit" class="btn btn-primary" >
                           Submit Speaker
                         </button>
                       </form>
@@ -94,7 +94,7 @@
                         <label for="updateSpeakerImageid">Default Image URL:</label>
                         <input type="url" id="updateSpeakerImageid" name="speakerImage" class="form-control mb-3" value="https://f2.toyhou.se/file/f2-toyhou-se/users/entomologist?12" required />
 
-                        <button type="submit" class="btn btn-secondary" onclick="updateSpeaker()">
+                        <button type="submit" class="btn btn-secondary">
                           Update Speaker
                         </button>
                       </form>
@@ -113,16 +113,31 @@
                     <div id="submitSpeakerImageDiv" class="mb-3 bg-faded p-3 h-100">
                       <form id="submitSpeakerImageForm" class="form-group">
 
-                        <label for="speakerImageNameid">Image name:</label>
-                        <input type="text" id="speakerImageNameid" name="speakerImageName" class="form-control mb-2" required />
+  <label for="speakerImageNameid">Image name:</label>
 
-                        <label for="speakerImageLinkid">Image URL:</label>
-                        <input type="url" id="speakerImageLinkid" name="speakerImageLink" class="form-control mb-3" value="https://f2.toyhou.se/file/f2-toyhou-se/users/entomologist?12" required />
+  <input
+    type="text"
+    id="speakerImageNameid"
+    name="speakerImageName"
+    class="form-control mb-2"
+    required
+  />
 
-                        <button type="submit" class="btn btn-primary" onClick="submitSpeakerImage()">
-                          Submit Image for Selected Speaker
-                        </button>
-                      </form>
+  <label for="speakerImageLinkid">Image URL:</label>
+
+  <input
+    type="url"
+    id="speakerImageLinkid"
+    name="speakerImageLink"
+    class="form-control mb-3"
+    required
+  />
+
+  <button type="submit" class="btn btn-primary">
+    Submit Image for Selected Speaker
+  </button>
+
+</form>
                     </div>
 
                   </div>
