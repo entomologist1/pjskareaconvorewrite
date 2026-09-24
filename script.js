@@ -103,10 +103,20 @@ class DialogueBox {
 
 //here too
 class AreaConvoBox {
-  constructor(imagePath) {
+  constructor(initName, imagePath) {
+    this.name = initName;
     this.imagePath = imagePath;
     this.dialogueBoxList = [];
-    //skip if empty when exporting
+
+    this.trueID = `${Date.now()}-${Math.floor(Math.random() * 100000)}`;
+  }
+
+  changeName(newName) {
+    this.name = newName;
+  }
+
+  changeImagePath(newImagePath) {
+    this.imagePath = newImagePath;
   }
 
   addDialogueBox(speaker) {
@@ -115,22 +125,19 @@ class AreaConvoBox {
 
   removeDialogueBox(dialogueBoxID) {
     const index = this.dialogueBoxList.findIndex(
-      dialogueBox => dialogueBox.trueID == dialogueBoxID
+      dialogueBox => dialogueBox.trueID === dialogueBoxID
     );
 
     if (index === -1) {
-      console.error("DialogueBox not found ....... ");
+      console.error("DialogueBox not found .......");
       return;
     }
 
-    this.dialogueBoxList.splice(index, 1); //
+    this.dialogueBoxList.splice(index, 1);
   }
-} 
-
+}
 
 //////////////////////////////
-
-
 
 
 // Speaker editing
@@ -341,8 +348,36 @@ document.addEventListener("DOMContentLoaded", function () {
       submitSpeakerImage
     );
   }
+  
+  //area convo
+  const areaConvoForm =
+    document.getElementById(
+      "submitAreaConvoForm"
+    );
+
+  if (areaConvoForm) {
+    areaConvoForm.addEventListener(
+      "submit",
+      submitAreaConvo
+    );
+  }
+
+
+  const updateAreaConvoForm =
+    document.getElementById(
+      "updateAreaConvoForm"
+    );
+
+  if (updateAreaConvoForm) {
+    updateAreaConvoForm.addEventListener(
+      "submit",
+      updateAreaConvo
+    );
+  }
+
 
   updateSelections();
+  updateAreaConvoSelections();
 });
 
 // Speaker image editing too
@@ -467,6 +502,239 @@ function renderSpeakerImages(selectedSpeaker) {
 
 
 // Area convo editing
+//basically the same as speaker tbh 
+function getSelectedAreaConvo() {
+  const selectedAreaConvoElement = document.querySelector(
+    "#areaConvoEditingHere #areaConvoList .selected"
+  );
+
+  if (!selectedAreaConvoElement) {
+    return null;
+  }
+
+  const selectedAreaConvoID =
+    selectedAreaConvoElement.dataset.trueId;
+
+  const selectedAreaConvo = areaConvoList.find(
+    areaConvo => areaConvo.trueID === selectedAreaConvoID
+  );
+
+  return selectedAreaConvo || null;
+}
+
+function submitAreaConvo(event) {
+  console.log("submitAreaConvo triggered");
+
+  if (event) {
+    event.preventDefault();
+  }
+
+  const areaConvoName = document
+    .getElementById("areaConvoNameid")
+    .value
+    .trim();
+
+  const areaConvoImage = document
+    .getElementById("areaConvoImageid")
+    .value
+    .trim();
+
+  const areaConvoListElement = document.querySelector(
+    "#areaConvoEditingHere #areaConvoList"
+  );
+
+  if (
+    !areaConvoListElement ||
+    !areaConvoName ||
+    !areaConvoImage
+  ) {
+    return;
+  }
+
+  const areaConvo = new AreaConvoBox(
+    areaConvoName,
+    areaConvoImage
+  );
+
+  areaConvoList.push(areaConvo);
+
+ 
+  const areaConvoDiv = document.createElement("div"); 
+  areaConvoDiv.classList.add("area-convo-entry");
+  areaConvoDiv.classList.add("col-12");
+
+  areaConvoDiv.dataset.trueId = areaConvo.trueID;
+
+  areaConvoDiv.style.position = "relative";
+  areaConvoDiv.style.margin = "5px"; 
+  areaConvoDiv.style.padding = "10px";
+  areaConvoDiv.style.border = "1px solid #afafaf";
+  areaConvoDiv.style.borderRadius = "8px";
+  areaConvoDiv.style.display = "inline-block";
+  areaConvoDiv.style.textAlign = "center";
+  areaConvoDiv.style.cursor = "pointer";
+
+ 
+  const areaConvoImageElement =
+    document.createElement("img");
+
+  areaConvoImageElement.src = areaConvoImage;
+  areaConvoImageElement.alt = areaConvoName;
+
+  areaConvoImageElement.style.minWidth = "150px";
+  areaConvoImageElement.classList.add("col-12");
+  areaConvoImageElement.style.height = "100px";
+  areaConvoImageElement.style.objectFit = "cover";
+
+  areaConvoDiv.appendChild(areaConvoImageElement);
+
+
+  const areaConvoTitle =
+    document.createElement("p");
+
+  areaConvoTitle.textContent = areaConvoName;
+  areaConvoTitle.style.marginTop = "8px";
+  areaConvoTitle.style.marginBottom = "-2px";
+  areaConvoDiv.appendChild(areaConvoTitle);
+
+
+  // Click to select
+  areaConvoDiv.addEventListener("click", function () {
+
+    const selectedAreaConvo =
+      areaConvoListElement.querySelector(".selected");
+
+    if (areaConvoDiv.classList.contains("selected")) {
+
+      areaConvoDiv.classList.remove("selected");
+
+    } else {
+
+      if (selectedAreaConvo) {
+        selectedAreaConvo.classList.remove("selected");
+      } 
+      areaConvoDiv.classList.add("selected");
+    }
+
+    updateAreaConvoSelections();
+  });
+
+
+  
+  const deleteButton = document.createElement("button");
+  deleteButton.type = "button";
+  deleteButton.classList.add(
+    "btn",
+    "btn-sm",
+    "btn-danger"
+  );
+
+  deleteButton.textContent = "Delete";
+  deleteButton.style.marginLeft = "10px";
+  deleteButton.addEventListener(
+    "click",
+    function (deleteEvent) {
+
+      deleteEvent.stopPropagation();
+
+      const areaConvoIndex =
+        areaConvoList.findIndex(
+          item =>
+            item.trueID === areaConvo.trueID
+        );
+
+      if (areaConvoIndex !== -1) {
+        areaConvoList.splice(
+          areaConvoIndex,
+          1
+        );
+      }
+
+      areaConvoDiv.remove();
+      updateAreaConvoSelections();
+    }
+  );
+
+
+  areaConvoDiv.appendChild(deleteButton);
+  areaConvoListElement.appendChild(areaConvoDiv);
+
+ 
+  document
+    .getElementById("submitAreaConvoForm")
+    .reset();
+}
+function populateUpdateAreaConvoForm(areaConvo) {
+
+  document.getElementById(
+    "updateAreaConvoNameid"
+  ).value = areaConvo.name;
+
+  document.getElementById(
+    "updateAreaConvoImageid"
+  ).value = areaConvo.imagePath;
+}
+function updateAreaConvo(event) {
+  if (event) {
+    event.preventDefault();
+  }
+
+  const selectedAreaConvo =
+    getSelectedAreaConvo();
+
+  if (!selectedAreaConvo) {
+    console.error("No area convo selected.");
+    return;
+  }
+
+
+  const newName = document
+    .getElementById("updateAreaConvoNameid")
+    .value
+    .trim();
+
+  const newImage = document
+    .getElementById("updateAreaConvoImageid")
+    .value
+    .trim();
+
+
+  if (!newName || !newImage) {
+    return;
+  }
+
+
+  selectedAreaConvo.changeName(newName);
+  selectedAreaConvo.changeImagePath(newImage);
+
+  const selectedAreaConvoElement =
+    document.querySelector(
+      "#areaConvoEditingHere #areaConvoList .selected"
+    );
+
+  if (selectedAreaConvoElement) {
+
+    const imageElement =
+      selectedAreaConvoElement.querySelector("img");
+
+    if (imageElement) {
+      imageElement.src = newImage;
+      imageElement.alt = newName;
+    }
+
+
+    const titleElement =
+      selectedAreaConvoElement.querySelector("p");
+
+    if (titleElement) {
+      titleElement.textContent = newName;
+    }
+  }
+
+  console.log(" updated",  selectedAreaConvo);
+}
+
+
 
 // Dialogue editing
 
@@ -537,3 +805,68 @@ function updateSelections() {
   populateUpdateSpeakerForm(selectedSpeaker);
   renderSpeakerImages(selectedSpeaker);
 }
+//actually separate it 
+function updateAreaConvoSelections() {
+
+  const submitForm =
+    document.getElementById(
+      "submitAreaConvoForm"
+    );
+
+  const updateForm =
+    document.getElementById(
+      "updateAreaConvoForm"
+    );
+
+
+  const areaConvoListElement =
+    document.querySelector(
+      "#areaConvoEditingHere #areaConvoList"
+    );
+
+
+  if (!submitForm || !updateForm || !areaConvoListElement) {
+    return;
+  }
+  const selectedAreaConvoElement =
+    areaConvoListElement.querySelector(
+      ".selected"
+    );
+
+
+  areaConvoSelect = !!selectedAreaConvoElement;
+
+  if (!selectedAreaConvoElement) {
+
+    submitForm.style.display = "block";
+    updateForm.style.display = "none";
+    return;
+  }
+  
+  const selectedAreaConvo =
+    areaConvoList.find(
+      areaConvo =>
+        areaConvo.trueID ===
+        selectedAreaConvoElement.dataset.trueId
+    );
+
+
+  if (!selectedAreaConvo) {
+    console.error("not found");
+    return;
+  }
+
+
+  submitForm.style.display = "none";
+  updateForm.style.display = "block";
+
+
+  populateUpdateAreaConvoForm(
+    selectedAreaConvo
+  );
+}
+
+
+//onload
+  updateSelections();
+  updateAreaConvoSelections();
