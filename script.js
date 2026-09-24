@@ -31,6 +31,8 @@ class Speaker {
     this.color = newColor;
   }
 
+  //nvm no overwriting too confusing
+  //idk control f in the exported html if its so urgent
   addOverwriteImage(imagePath, imageName) {
     this.images[imageName] = imagePath;
   }
@@ -126,7 +128,33 @@ class AreaConvoBox {
 } 
 
 
+//////////////////////////////
+
+
+
+
 // Speaker editing
+
+function getSelectedSpeaker() {
+  //helper for getting true id
+  const selectedSpeakerElement = document.querySelector(
+    "#speakerEditingHere #speakerList .selected"
+  );
+
+  if (!selectedSpeakerElement) {
+    return null;
+  }
+
+  const selectedSpeakerID = selectedSpeakerElement.dataset.trueId;
+
+  const selectedSpeaker = speakerList.find(
+  speaker => speaker.trueID === selectedSpeakerID
+);
+
+return selectedSpeaker || null;
+}
+
+//speaker submit
 function submitSpeaker(event) {
   console.log("submitSpeaker triggered")
   if (event) {
@@ -213,17 +241,230 @@ function submitSpeaker(event) {
   speakerListElement.appendChild(speakerDiv);
   document.getElementById("submitSpeakerForm").reset();
 }
+//speaker update
+function populateUpdateSpeakerForm(selectedSpeaker) {
+  document.getElementById("updateSpeakerNameid").value =
+    selectedSpeaker.name;
+
+  document.getElementById("updateSpeakerColorId").value =
+    selectedSpeaker.color;
+
+  document.getElementById("updateSpeakerImageid").value =
+    selectedSpeaker.images.default;
+}
+function updateSpeaker(event) {
+  if (event) {
+    event.preventDefault();
+  }
+
+  const selectedSpeaker = getSelectedSpeaker();
+
+  if (!selectedSpeaker) {
+    console.error("No speaker selected.");
+    return;
+  }
+
+  const newName = document
+    .getElementById("updateSpeakerNameid")
+    .value
+    .trim();
+
+  const newColor = document
+    .getElementById("updateSpeakerColorId")
+    .value
+    .trim();
+
+  const newImage = document
+    .getElementById("updateSpeakerImageid")
+    .value
+    .trim();
+
+  if (!newName || !newColor || !newImage) {
+    return;
+  }
+
+  selectedSpeaker.changeName(newName);
+  selectedSpeaker.changeColor(newColor);
+  selectedSpeaker.images.default = newImage;
+
+  
+  const selectedSpeakerElement =
+    document.querySelector(
+      "#speakerEditingHere #speakerList .selected"
+    );
+
+  if (selectedSpeakerElement) {
+
+    const speakerImageElement =
+      selectedSpeakerElement.querySelector("img");
+
+    if (speakerImageElement) {
+      speakerImageElement.src = newImage;
+      speakerImageElement.alt = newName;
+    }
+
+    const speakerTitle =
+      selectedSpeakerElement.querySelector("p");
+    if (speakerTitle) {
+      speakerTitle.textContent = newName;
+    }
+  }
+
+  renderSpeakerImages(selectedSpeaker);
+  console.log("speaker updated ", selectedSpeaker);
+}
 
 document.addEventListener("DOMContentLoaded", function () {
-  const speakerForm = document.getElementById("submitSpeakerForm");
+  const speakerForm =
+    document.getElementById("submitSpeakerForm");
 
   if (speakerForm) {
     speakerForm.addEventListener("submit", submitSpeaker);
   }
-  
+
+  const updateSpeakerForm =
+    document.getElementById("updateSpeakerForm");
+
+  if (updateSpeakerForm) {
+    updateSpeakerForm.addEventListener(
+      "submit",
+      updateSpeaker
+    );
+  }
+
+  const speakerImageForm =
+    document.getElementById("submitSpeakerImageForm");
+
+  if (speakerImageForm) {
+    speakerImageForm.addEventListener(
+      "submit",
+      submitSpeakerImage
+    );
+  }
+
   updateSelections();
-  
 });
+
+// Speaker image editing too
+function submitSpeakerImage(event) {
+  event.preventDefault();
+
+  const selectedSpeaker = getSelectedSpeaker();
+  if (!selectedSpeaker) {
+    console.error("no speaker selected.. image editing shouldnt show up tho unless someone does smth weird.");
+    return; //
+  }
+
+  const imageName = document
+    .getElementById("speakerImageNameid")
+    .value
+    .trim();
+
+  const imageLink = document
+    .getElementById("speakerImageLinkid")
+    .value
+    .trim();
+
+  if (!imageName || !imageLink) {
+    return;
+  }
+ 
+  if (imageName === "default") { //do not
+    return;
+  } 
+  selectedSpeaker.addOverwriteImage(imageLink, imageName);
+
+  renderSpeakerImages(selectedSpeaker);
+
+  document.getElementById("submitSpeakerImageForm").reset();
+}
+function renderSpeakerImages(selectedSpeaker) {
+  const speakerImageList =
+    document.getElementById("speakerImageList");
+
+  if (!speakerImageList) {
+    return;
+  }
+ //clear
+  speakerImageList.innerHTML = "";
+
+  if (!selectedSpeaker) {
+    return;
+  }
+
+  Object.entries(selectedSpeaker.images).forEach(
+    ([imageName, imagePath]) => {
+
+      const imageDiv = document.createElement("div");
+
+      imageDiv.classList.add("speaker-image-entry");
+
+      imageDiv.style.position = "relative";
+      imageDiv.style.display = "inline-block";
+      imageDiv.style.verticalAlign = "top";
+      imageDiv.style.margin = "10px";
+      imageDiv.style.padding = "10px";
+      imageDiv.style.border = "1px solid #afafaf";
+      imageDiv.style.borderRadius = "8px";
+      imageDiv.style.textAlign = "center";
+      imageDiv.style.backgroundColor = "white";
+
+      const imageElement = document.createElement("img");
+
+      imageElement.src = imagePath;
+      imageElement.alt = `${selectedSpeaker.name} - ${imageName}`;
+      imageElement.style.width = "120px";
+      imageElement.style.height = "120px";
+      imageElement.style.objectFit = "cover";
+      imageElement.style.display = "block";
+      imageElement.style.marginBottom = "8px";
+
+      imageDiv.appendChild(imageElement);
+
+      const imageNameElement = document.createElement("p");
+
+      imageNameElement.textContent = imageName;
+      imageNameElement.style.marginBottom = "8px";
+
+      imageDiv.appendChild(imageNameElement);
+ 
+      if (imageName === "default") {
+        const defaultLabel = document.createElement("span");
+
+        defaultLabel.classList.add(
+          "btn",
+          "btn-sm",
+          "btn-secondary"
+        );
+        defaultLabel.textContent = "Default";
+        imageDiv.appendChild(defaultLabel);
+
+      } else {
+
+        const deleteButton = document.createElement("button");
+
+        deleteButton.type = "button";
+        deleteButton.classList.add(
+          "btn",
+          "btn-sm",
+          "btn-danger"
+        );
+
+        deleteButton.textContent = "Delete";
+
+        deleteButton.addEventListener("click", function () {
+          selectedSpeaker.removeImage(imageName);
+          renderSpeakerImages(selectedSpeaker);
+        });
+
+        imageDiv.appendChild(deleteButton);
+      }
+
+      speakerImageList.appendChild(imageDiv);
+    }
+  );
+}
+
 
 // Area convo editing
 
@@ -238,34 +479,61 @@ document.addEventListener("DOMContentLoaded", function () {
 // speaker images' display depends on speakerlist's selection
 // dialogue editing depends on area convo's selection
 
+
+
 function updateSelections() {
   const imageControlDiv = document.getElementById("imageControl");
-  
   const submitSpeakerForm = document.getElementById("submitSpeakerForm");
   const updateSpeakerForm = document.getElementById("updateSpeakerForm");
-  
+
   const speakerListElement = document.querySelector(
     "#speakerEditingHere #speakerList"
   );
+  
+  const speakerImageList = document.getElementById("speakerImageList");
 
-  const selectedSpeaker = speakerListElement?.querySelector(".selected");
-  speakerSelect = !!selectedSpeaker;
+  const selectedSpeakerElement =
+    speakerListElement?.querySelector(".selected");
 
-  if (speakerSelect === false) {
+  speakerSelect = !!selectedSpeakerElement;
+  
+  
+  /////////////////////////////////
+
+  //if speaker selected show image controls
+  if (!selectedSpeakerElement) {
     imageControlDiv.style.visibility = "collapse";
     
     submitSpeakerForm.style.display = "block";
     updateSpeakerForm.style.display = "none";
-  } else {
+
+    // Clear image list
+    if (speakerImageList) {
+      speakerImageList.innerHTML = "";
+    }
+
+    return;
+  }
+ 
+  //else
+
+  const selectedSpeaker = speakerList.find(
+    speaker =>
+      speaker.trueID === selectedSpeakerElement.dataset.trueId
+  );
+
+  if (!selectedSpeaker) {
+    console.error("Selected speaker not found (?)");
+    return;
+  }
+
     imageControlDiv.style.visibility = "visible";
     
-    submitSpeakerForm.style.display = "none";
+    submitSpeakerForm.style.display = "none"; //
     updateSpeakerForm.style.display = "block";
-  }
+
+  //and render
+  
+  populateUpdateSpeakerForm(selectedSpeaker);
+  renderSpeakerImages(selectedSpeaker);
 }
-
-
-
-
-//on load
-updateSelections();
