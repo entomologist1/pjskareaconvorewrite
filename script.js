@@ -128,6 +128,7 @@ class AreaConvoBox {
 
 // Speaker editing
 function submitSpeaker(event) {
+  console.log("submitSpeaker triggered")
   if (event) {
     event.preventDefault();
   }
@@ -239,6 +240,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function updateSelections() {
   const imageControlDiv = document.getElementById("imageControl");
+  
+  const submitSpeakerForm = document.getElementById("submitSpeakerForm");
+  const updateSpeakerForm = document.getElementById("updateSpeakerForm");
+  
   const speakerListElement = document.querySelector(
     "#speakerEditingHere #speakerList"
   );
@@ -248,8 +253,14 @@ function updateSelections() {
 
   if (speakerSelect === false) {
     imageControlDiv.style.visibility = "collapse";
+    
+    submitSpeakerForm.style.display = "block";
+    updateSpeakerForm.style.display = "none";
   } else {
     imageControlDiv.style.visibility = "visible";
+    
+    submitSpeakerForm.style.display = "none";
+    updateSpeakerForm.style.display = "block";
   }
 }
 
