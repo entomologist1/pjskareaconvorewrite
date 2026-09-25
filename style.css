@@ -1,7 +1,7 @@
 
 
 .selected {
-    border: 2px solid rgb(255, 0, 208);
-    background-color: #ffd2e2;
-    cursor: pointer;
-  }
+  border: 2px solid rgb(255, 0, 208) !important;
+  background-color: #ffd2e2 !important;
+  cursor: pointer;
+}
