@@ -4,12 +4,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>my website</title>
+  <title>entomologist1</title>
   <!-- boostrap -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
 
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="../global/global.css" />
+
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://arcaderot.neocities.org/global/global.css" />
+    
+    <script src="https://u.widget.st/ar.js"></script>
 
   <!-- coloris-->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.css" />
@@ -23,15 +26,23 @@
   <div id="navbarContainer">
     <div class="row p-2" id="navbar" data-aos="fade-down" data-aos-delay="1000">
       <div class="col-12 col-md-5 d-flex align-items-center">
-        <p>my website</p>
+        <p>entomologist1</p>
       </div>
 
       <div class="col-12 col-md-7 d-flex align-items-center justify-content-end">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item ml-auto">
-              <a href="/">home</a>
-            </li>
+            <li class="breadcrumb-item active ml-auto" aria-current="page">
+                pjskareaconvo-maker
+              </li>
+
+              <li class="breadcrumb-item ml-auto">
+                <a href="/tools">tools</a>
+              </li>
+
+              <li class="breadcrumb-item ml-auto">
+                <a href="/">home</a>
+              </li>
           </ol>
         </nav>
       </div>
@@ -39,20 +50,45 @@
   </div>
 
   <!-- main page -->
-  <div id="mainContentContainer" class="row justify-content-center align-items-center p-4" style="height: 1500px">
+  <div id="mainContentContainer" class="row justify-content-center align-items-center p-4" >
     <!-- actual main content goes here -->
-    <div id="mainContent" class="col-12 col-md-10 d-flex justify-content-center flex-wrap">
-      <div id="container" class="col-12 p-4 g-3" style="max-width: 1000px">
-        <h2><u>title</u></h2>
-        <h3>date</h3>
+    <div id="mainContent" class="col-12 col-md-10 d-flex justify-content-center flex-wrap" style=" margin-top: 150px;">
+      <div id="container" class="col-12 p-4 g-3" style="max-width: 1000px;">
+        <h2><u>pjsk area convo htmlbuilder</u></h2> <ws-widget type="reactions" name="pjskareaconvochart" predefine="arcaderot" wid="11" auto></ws-widget>   </h2>
+        <h3>09/24/2026</h3>
 
-        <p>talk</p>
+        <div 
+            id="intro"
+            class="card"
+            style="padding: 20px; margin-bottom: 10px"> 
+          <p>the rewrite :fire: :fire: :fire:</p>
+          <p>bc the old one was so scuffed and also made on python before i learned python. also i added the option to have more than 1 image per speaker :smile:</p> 
+  
+          <br>
+  
+          <p>basically just add your speakers in the tab. select a speaker to edit its info or add more images you want to use</p>
+          <p>after that you create an area convo. in the wiki its usually the location where the area convo is happening but like whatever. you can also drag to reorder these and click to edit the details</p>
+          <p>finally just add dialogue and whatnot. you can also drag to reorder/click to edit. yepyepyep </p>
+        
+        </div>
+
+        <div class="col-12 m-3 row justify-content-center align-items-center">
+          <button id="importDataButton" type="button" class="col-6 col-md-3 btn btn-sm btn-primary h-100" style="min-height: 50px">
+            import json data
+          </button>
+
+          <button id="exportDataButton" type="button" class="col-6 col-md-3 btn btn-sm btn-secondary h-100" style="min-height: 50px">
+            export data as json
+          </button>
+
+          <input type="file" id="importDataInput" accept=".json,application/json" style="display: none;" />
+        </div>
 
         <div class="accordion" id="accordionExample">
           <div class="accordion-item">
             <h2 class="accordion-header">
               <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                Speaker Editing
+                speaker editing
               </button>
             </h2>
             <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
@@ -61,7 +97,7 @@
 
                 <!-- speaker functionality will go here -->
                 <div class="row" style="min-height: 300px; max-height: 500px; overflow: scroll;">
-                  <div id="speakerAddDelete" class="col" style="min-height: 100px; background-color:pink; overflow: stretch;">
+                  <div id="speakerAddDelete" class="col" style="min-height: 100px; background-color:#fcf9f0; overflow: stretch;">
 
                     <div id="submitSpeakerDiv" class="mb-3 bg-faded p-3 h-100">
 
@@ -102,12 +138,12 @@
                     </div>
 
                   </div>
-                  <div id="speakerList" class="col-12 col-sm-12 col-md-8 order-12 order-sm-12 order-md-6" style="min-height: 100px; background-color:red; overflow: scroll; "> </div>
+                  <div id="speakerList" class="col-12 col-sm-12 col-md-8 order-12 order-sm-12 order-md-6" style="min-height: 100px; overflow: scroll; "> </div>
                 </div>
 
                 <!-- speaker image functionality will go here (only show when a speaker is actually selected ?) -->
                 <div id="imageControl" class="row" style="min-height: 300px;">
-                  <div id="speakerImageAddDelete" class="col" style="min-height: 100px; background-color:blue">
+                  <div id="speakerImageAddDelete" class="col" style="min-height: 100px; background-color:#776e63">
 
                     <!-- submit -->
                     <div id="submitSpeakerImageDiv" class="mb-3 bg-faded p-3 h-100">
@@ -129,7 +165,8 @@
                     </div>
 
                   </div>
-                  <div id="speakerImageList" class="col-12 col-sm-12 col-md-8 order-12 order-sm-12 order-md-6" style="min-height: 100px; background-color:cyan"> speaker images go here when submitted</div>
+                  <div id="speakerImageList" class="col-12 col-sm-12 col-md-8 order-12 order-sm-12 order-md-6" style="min-height: 100px;
+        max-height: 500px; background-color:#4d4236"> speaker images go here when submitted</div>
                 </div>
 
               </div>
@@ -139,7 +176,7 @@
           <div class="accordion-item">
             <h2 class="accordion-header">
               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                Area Convo Editing
+                area convo editing
               </button>
             </h2>
             <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
@@ -147,7 +184,7 @@
               <div class="container card accordion-body" id="areaConvoEditingHere">
                 <div class="row" style="min-height: 300px;">
 
-                  <div id="areaConvoAddDelete" class="col" style="min-height: 100px; background-color:pink">
+                  <div id="areaConvoAddDelete" class="col" style="min-height: 100px; background-color: #fcf9f0 ">
 
                     <div id="submitAreaConvoDiv" class="mb-3 bg-faded p-3 h-100">
 
@@ -197,7 +234,6 @@
                   <div id="areaConvoList" class="col-12 col-sm-12 col-md-8 order-12 order-sm-12 order-md-6" style="
         min-height: 100px;
         max-height: 500px;
-        background-color:red;
         overflow: scroll;
       "></div>
 
@@ -209,42 +245,99 @@
           <div class="accordion-item">
             <h2 class="accordion-header">
               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                Accordion Item #3
+                dialogue editing
               </button>
             </h2>
             <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
 
               <div class="container card accordion-body" id="dialogueEditingHere">
-                <div class="row " style="min-height: 300px;">
-                  <div id="dialogueAddDelete" class="col" style="min-height: 100px; background-color:pink">
 
-                    <!-- submit -->
+                <div class="row" style="min-height: 300px;">
+
+                  <div id="dialogueAddDelete" class="col-12 col-md-4" style="min-height: 100px; background-color:#fcf9f0;">
+
                     <div id="submitdialogueDiv" class="mb-3 bg-faded p-3 h-100">
+
                       <form id="submitdialogueForm" class="form-group">
+                        <label for="dialogueSpeakerid">Speaker:</label>
+                        <select id="dialogueSpeakerid" class="form-control mb-2" required>
+                        </select>
 
-                        <!-- change to dropdowns for speakerList and speaker.images-->
-                        <label for="dialogueNameid">Name:</label>
-                        <input type="text" id="dialogueNameid" name="dialogueName" class="form-control mb-2" required />
+                        <label for="dialogueTextid">Dialogue:</label>
+                        <textarea id="dialogueTextid" class="form-control mb-2" rows="5" required>Replace text here .........</textarea>
 
-                        <label for="dialogueImageid">Background Image URL:</label>
-                        <input type="url" id="dialogueImageid" name="dialogueImage" class="form-control mb-3" value="https://f2.toyhou.se/file/f2-toyhou-se/users/entomologist?12" required />
+                        <label for="dialogueImageid">Speaker Image:</label>
+                        <select id="dialogueImageid" class="form-control mb-3" required>
+                        </select>
 
-                        <button type="submit" class="btn btn-primary" >
-                          Submit Dialogue
+                        <button type="submit" class="btn btn-primary">
+                          Add Dialogue
                         </button>
-                      </form>
-                    </div>
 
+                      </form>
+
+                      <form id="updatedialogueForm" class="form-group" style="display: none;">
+
+                        <label for="updateDialogueSpeakerid">Speaker:</label>
+                        <select id="updateDialogueSpeakerid" class="form-control mb-2" required>
+                        </select>
+
+                        <label for="updateDialogueTextid">Dialogue:</label>
+                        <textarea id="updateDialogueTextid" class="form-control mb-2" rows="5" required></textarea>
+
+                        <label for="updateDialogueImageid">Speaker Image:</label>
+                        <select id="updateDialogueImageid" class="form-control mb-3" required>
+                        </select>
+
+                        <button type="submit" class="btn btn-secondary">
+                          Update Dialogue
+                        </button>
+
+                      </form>
+
+                    </div>
                   </div>
-                  <div id="dialogueList" class="col-12 col-sm-12 col-md-8 order-12 order-sm-12 order-md-6" style="min-height: 100px; background-color:red"> dialogue go here when submitted</div>
+
+                  <div id="dialogueList" class="col-12 col-md-8" style="
+        min-height: 100px;
+        max-height: 500px;
+        overflow:scroll;
+      ">
+                  </div>
+
                 </div>
+
               </div>
 
             </div>
           </div>
         </div>
 
+        <!-- export -->
+
+        <div id="thisistheexport" class="mb-3">
+          <button id="exportToHTML" type="button" class="col-6 col-md-3 btn btn-sm btn-success p-3 h-1" onclick="exportToHTML();" style="min-height: 50px; margin-top: 15px;">
+            export as HTML
+          </button>
+
+          <!-- output -->
+
+          <div id="outerAccordion" class="mb-3"></div>
+
+          <button id="copyButton" class="btn btn-secondary mb-3" onclick="copyHTML()">
+
+            Copy :3
+
+          </button>
+
+          <h3>export</h3>
+
+          <pre id="exportBox" class="p-3 border bg-light" style="height: 500px; overflow: auto; white-space: pre-wrap"></pre>
+
+        </div>
+
       </div>
+
     </div>
   </div>
 
